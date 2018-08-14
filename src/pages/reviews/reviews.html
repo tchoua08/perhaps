@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>My Follows</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+    
+          refreshingSpinner="circles"
+         >
+        </ion-refresher-content>
+      </ion-refresher>
+      
+            
+      <ion-row *ngIf="evnts === undefined || evnts.length == 0">
+          <ion-col text-center>
+            <div class="msg">
+              <ion-icon name="md-bulb"></ion-icon>
+              <p>Discover and follow your favourite events </p>
+            </div>
+           
+              
+          </ion-col>
+        </ion-row>
+   
+   
+      
+    
+
+
+      <ion-card  *ngFor="let key of evnts  let i = index">
+      
+          <ion-item >
+            <ion-icon name="wine" item-left large ></ion-icon>
+            <h2>{{key.title}} </h2>
+            <p>{{key.description}}</p>
+
+            <button ion-button icon-right clear large item-end color="secondary" (click)="unfollow(key.id,i,key.following)">
+                <ion-icon color="danger" name="ios-remove-circle-outline"></ion-icon>
+            </button>
+          </ion-item>
+          <ion-item> 
+            <ion-icon name="calendar" item-left small ></ion-icon>
+            <span item-left>{{key.startDate | date:'  dd MMMM' }}</span>
+            <ion-icon name="cash" item-left small ></ion-icon>
+            <span item-left>{{key.ticket_price}}£</span>
+            <button ion-button icon-right clear item-end color="secondary" (click)="gotoEvent(key.id)">
+              Show more
+              <ion-icon showWhen="android" name="arrow-dropright"></ion-icon>
+            </button>
+          </ion-item>
+        
+        </ion-card>
+</ion-content>

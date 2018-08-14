@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>My profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+
+  <ion-card class="image"  *ngIf="avatar">
+    <img class="image" src="{{avatar}}"/>
+ </ion-card>
+  <ion-item>
+      <h1>{{firstname}} {{lastname}}</h1>
+    <button ion-button color="secondary" outline item-end (click)="editProfile()">Edit</button>
+  </ion-item>
+    
+  <ion-list>
+      <button ion-item >
+          <ion-icon name="pricetags" item-start color="secondary"></ion-icon>
+           Tickets
+      </button>
+
+
+      <!-- <button ion-item >
+          <ion-icon name="paper" item-start color="secondary"></ion-icon>
+           Activity
+      </button> -->
+      
+      <button ion-item (click)="cards()">
+          <ion-icon name="card" item-start  color="secondary"></ion-icon>
+            Cards 
+       </button>
+
+
+       <button ion-item (click)="settings()" >
+          <ion-icon name="settings" item-start  color="secondary"></ion-icon>
+            Account Settings
+       </button>
+
+       <button ion-item  (click)="logout()" >
+          <ion-icon name="log-out" item-start  color="secondary" ></ion-icon>
+            Log out
+       </button>
+
+
+  </ion-list>
+</ion-content>

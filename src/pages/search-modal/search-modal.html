@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+  
+  <ion-searchbar  #search
+  (ionInput)="onInput($event)"
+  [(ngModel)]="query"
+  [showCancelButton]="shouldShowCancel">
+</ion-searchbar>
+<ion-buttons left>
+    
+  <button ion-button icon-only (click)="closeModal()">
+    <ion-icon name="arrow-back"></ion-icon>
+  </button>
+</ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+</ion-content>

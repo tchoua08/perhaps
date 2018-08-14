@@ -1,0 +1,77 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>{{card.type}} ••••{{card.number | slice:-4}}</ion-title>
+    
+      <ion-buttons right>
+      
+          <button ion-button icon-only (click)="deleteCard()">
+            <ion-icon name="trash" color="danger"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding class="no-scroll" >
+  
+  <ion-item class="card" *ngIf="card.type=='Visa'">
+      <img src="assets/imgs/visa.png"/>
+  </ion-item>   
+  
+  
+  <ion-item class="card" *ngIf="card.type=='Mastercard'">
+    <img src="assets/imgs/mastercard.png"/>
+  </ion-item>   
+  
+  
+  <ion-item class="card" *ngIf="card.type=='AMEX'">
+    <img src="assets/imgs/amex.png"/>
+  </ion-item>   
+  
+  <ion-item class="card" *ngIf="card.type=='Diners'">
+    <img src="assets/imgs/diners.png"/>
+  </ion-item>   
+  
+  <ion-item class="card" *ngIf="card.type=='Discover'">
+    <img src="assets/imgs/discover.png"/>
+  </ion-item>   
+  
+  <ion-item class="card" *ngIf="card.type=='JCB'">
+    <img src="assets/imgs/jcb.svg"/>
+  </ion-item>   
+  
+  
+  
+  <br>
+  <ion-list  no-lines >
+    
+         
+      <ion-item  no-lines>
+          <ion-label stacked >Card Number</ion-label>
+          <ion-input type="number"  [(ngModel)]='card.number' (change)='onChangeNumber($event.target.value)'></ion-input>
+      </ion-item>
+      
+      <ion-item  no-lines>
+        <ion-label stacked >Expires</ion-label>
+        <ion-datetime displayFormat="MM/YYYY" [(ngModel)]="card.expires"></ion-datetime>
+      </ion-item>
+  
+      <ion-item  no-lines >
+          <ion-label stacked>CSC</ion-label>
+          <ion-input type="number" [(ngModel)]='card.csc'></ion-input>
+      </ion-item>
+  
+        <ion-item   no-lines>
+          <ion-label stacked>Card Type</ion-label>
+          <ion-input type="text"  [(ngModel)]='card.type' ></ion-input>
+      </ion-item>
+      <button (click)="updateCard()" ion-button block>Save Changes</button>
+  
+        
+      
+      </ion-list>
+  
+  </ion-content>
+  

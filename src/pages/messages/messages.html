@@ -1,0 +1,62 @@
+<ion-header>
+ 
+  <ion-navbar color="secondary">
+    <ion-title>Messages</ion-title>
+  </ion-navbar>
+ 
+</ion-header>
+ 
+<!-- [class.left]=" msg.sentby === toUser.id " -->
+<ion-content #content>
+    <ion-spinner  name="circles" *ngIf="!user" color="secondary"></ion-spinner>
+  <div class="message-wrap"  *ngIf="user">
+
+    <div *ngFor="let msg of messages"
+         class="message"
+       
+         [class.right]=" msg.sentby === user.uid "
+        >
+      <img class="user-img" [src]="user.photoURL" alt="" src="">
+     
+      <div class="msg-detail">
+        <div class="msg-info">
+          <p>
+            &nbsp;&nbsp;&nbsp;{{msg.timestamp | date:'dd-mm-yyyy HH:mm'}}</p>
+        </div>
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker "></p>
+          {{msg.message}}
+        </div>
+
+      </div>
+
+  
+  </div>
+   
+  </div>
+</ion-content>
+<!-- [style.height]="showEmojiPicker ? '255px' : '55px'" -->
+<ion-footer no-border>
+  <div class="input-wrap">
+
+      <!-- <button ion-button clear icon-only (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'top'"
+      (emojiPickerSelect)="handleSelection($event)">
+      <ion-icon name="md-happy"></ion-icon>
+    </button> -->
+    
+    <textarea #chat_input
+              placeholder="Type your message..."
+              [(ngModel)]="newmessage"
+              (keyup.enter)="sendMsg()"
+          
+             >
+    </textarea>
+
+  
+    
+    <button ion-button clear icon-only item-right (click)="sendMsg()">
+      <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+    </button>
+  </div>
+</ion-footer>

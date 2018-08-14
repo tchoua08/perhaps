@@ -1,0 +1,7 @@
+{
+  "name": "Perhaps",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

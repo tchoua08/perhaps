@@ -1,0 +1,53 @@
+page-discover {
+    ion-card {
+        position: relative;
+        text-align: center;
+        height:200px !important;
+        width:100% !important;
+        margin-left:0% !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        border-radius:none;
+   
+        
+     }
+
+     ion-searchbar{
+       background-color: black
+     }
+
+   .background{
+     background-color:whitesmoke;
+   }
+ 
+   .card-title {
+     position: absolute;
+     top: 36%;
+     font-size: 2.1em;
+     width: 100%;
+     font-weight: bold;
+     color: #fff;
+     font-family: magra;
+     text-shadow: 2px 1px grey
+   }
+ 
+   .card-subtitle {
+     font-size: 1.5em;
+     position: absolute;
+     top: 52%;
+     width: 100%;
+     font-weight: bold;
+     color: #fff;
+   }
+
+   img{
+     max-height: 100%;
+     max-width: 100%;
+     border-radius:none;
+     object-fit: cover;
+   
+ 
+    
+   }
+
+}

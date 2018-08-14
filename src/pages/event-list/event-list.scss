@@ -1,0 +1,45 @@
+.md,
+.ios,
+.wp {
+ page-event-list {
+   
+    ion-navbar.toolbar {
+        min-height: 200px;
+      }
+      
+    .weekdays{
+        .toolbar-background{
+          background:url("../assets/imgs/pic2.jpeg"); 
+        }
+    }
+
+    .fridays{
+        .toolbar-background{
+          background:url("../assets/imgs/pic3.jpeg"); 
+        }
+    }
+
+    .saturdays{
+        .toolbar-background{
+          background:url("../assets/imgs/pic4.jpeg"); 
+        }
+    }
+
+
+      .background{
+          background-color: whitesmoke
+      }
+
+      ion-spinner {
+      
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: auto;
+        top:50%;
+      }
+ }
+
+
+ 
+}

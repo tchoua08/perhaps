@@ -1,0 +1,107 @@
+<ion-header>
+
+</ion-header>
+  
+  
+  <ion-content  class="background" >
+   
+    <!-- <ion-spinner  name="circles" *ngIf="!evnts" color="secondary"></ion-spinner> -->
+          <ion-fab  top right>
+            <button ion-fab color="secondary" (click)="share()">
+               <ion-icon name="md-share"></ion-icon>
+            </button>
+           
+      </ion-fab>
+
+      <ion-slides effect="slide" pager="true" class="gallery">
+          <ion-fab  top left>
+              <button ion-fab class="back" (click)="back()">
+                 <ion-icon name="arrow-back"></ion-icon>
+              </button>
+          </ion-fab>
+
+        
+          <ion-slide>
+              <img src="{{event.image}}" class="image">
+          </ion-slide>
+          <!-- <ion-slide>
+              <img src="https://static.designmynight.com/uploads/2017/05/IMG_7686-1200x900-optimised.jpg">
+          </ion-slide>
+          <ion-slide>
+              <img src="https://static.designmynight.com/uploads/2017/03/chic-DSC02476-1200x801-optimised.jpg">
+          </ion-slide> -->
+        </ion-slides>
+  
+        <ion-card>
+          <h1>{{event.title}}</h1>
+        </ion-card>
+    <ion-card>
+    <ion-item>
+          <!-- <ion-icon name="pricetag" item-left large ></ion-icon> -->
+          <h2>What will Happen?</h2>
+          <p text-wrap>{{event.description}} </p>
+         
+      </ion-item>
+      <!-- <ion-item color>
+        <ion-icon name="checkmark-circle" item-start color="secondary"></ion-icon>
+        Attending
+        <ion-badge item-end color="secondary">{{100}}</ion-badge>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-icon name="heart" item-start color="secondary"></ion-icon>
+      Following
+      <ion-badge item-end color="secondary">{{event.following}}  </ion-badge>
+  </ion-item>
+
+        
+  </ion-card>
+  <ion-card>
+  
+      <ion-item>
+          <!-- <ion-icon name="pricetag" item-left large ></ion-icon> -->
+          <h1>How to find us</h1>
+         
+        </ion-item>
+      
+      <ion-item>
+        <ion-icon name="calendar" item-start large color="secondary"></ion-icon>
+        <h2>{{event.startDate | date:'dd MMMM'}} - {{event.endDate | date:'dd MMMM'}}</h2>
+        
+      </ion-item>
+    
+      <ion-item>
+        <ion-icon name="time" item-left large color="secondary" ></ion-icon>
+        <h2>{{event.startDate | date :'HH:mm'}} - {{event.endDate | date :'HH:mm'}}</h2>
+      </ion-item>
+      
+      <ion-item>
+        <ion-icon name="pricetag" item-left large color="secondary" ></ion-icon>
+        <h2>{{event.ticket_price}}£</h2>
+        <ion-icon name="remove" item-right small color="dark" (click)="removeTicket()"  >{{tickets}}</ion-icon>
+        <ion-icon name="add" item-right small  color="dark" (click)="addTicket()"></ion-icon>
+        
+      </ion-item>
+
+      <button ion-item (click)="launchMaps()">
+        <ion-icon name="pin" item-left large color="secondary" ></ion-icon>
+        <h2>{{event.address}}</h2>
+      </button>
+      
+      <ion-item>
+        <button ion-button icon-left outline  item-end color="secondary">
+          <ion-icon name="mail" ></ion-icon>
+          Contact
+        </button>
+        <button ion-button icon-left outline  [ngStyle]="{'background-color': buttonColor,'color':color}"  color="secondary" (click)="follow()">
+            <ion-icon name="heart" color="red" [ngStyle]="{'color':icolor}"></ion-icon>
+            
+            Follow
+          </button>
+      </ion-item>
+ 
+    </ion-card>
+
+    <button ion-button full color="secondary">Book now</button>
+  </ion-content>
+  

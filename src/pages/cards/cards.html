@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>My Cards</ion-title>
+    <ion-buttons end>
+    
+        <button ion-button icon-only (click)="addCard()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list no-lines>
+      <button ion-item  *ngFor="let card of cards" (click)="editCard(card)" class="card">
+          <ion-icon name="card" item-left large ></ion-icon>  
+          <h2>••••••••••••{{card.number | slice:-4}}</h2>
+          <p>{{card.type}}</p>
+          <ion-icon showWhen="android" name="ios-arrow-forward" item-end></ion-icon>
+      </button> 
+  
+  
+  </ion-list>
+ 
+    
+
+</ion-content>

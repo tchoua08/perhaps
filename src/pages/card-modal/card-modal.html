@@ -1,0 +1,53 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>Add new Card</ion-title>
+   
+  
+    
+    <ion-buttons left>
+      
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="background">
+      <ion-item>
+          <img  class="card" src="assets/imgs/card.png"/>
+       </ion-item>  
+  <ion-list >
+    
+         
+        <ion-item>
+            <ion-label stacked >Card Number</ion-label>
+            <ion-input type="number"  [(ngModel)]='card.number' (change)='onChangeNumber($event.target.value)'></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label stacked >Expires</ion-label>
+          <ion-datetime displayFormat="MM-YYYY" min="2018" max="2040"  [(ngModel)]="card.expires"></ion-datetime>
+        </ion-item>
+  
+        <ion-item  >
+            <ion-label stacked>CSC</ion-label>
+            <ion-input type="number" [(ngModel)]='card.csc'></ion-input>
+        </ion-item>
+  
+          <ion-item  >
+            <ion-label stacked>Card Type</ion-label>
+            <ion-input type="text"  [(ngModel)]='card.type' ></ion-input>
+        </ion-item>
+  
+          
+        
+        </ion-list>
+        <button (click)="saveCard()" ion-button block >Save</button>
+  
+  
+  </ion-content>
+  

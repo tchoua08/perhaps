@@ -1,0 +1,43 @@
+
+<ion-header>
+
+</ion-header>
+
+
+<ion-content class="background">
+    <h2 class="title">Perhaps</h2>
+
+    <ion-card>
+        <ion-card-header>
+          Register
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list no-lines>
+            <div class="spacer" style="height: 10px;"></div>
+            <ion-item>
+              <ion-input type="email" placeholder="Email" [(ngModel)]="newuser.email"></ion-input>
+            </ion-item>
+            <div class="spacer" style="height: 5px;"></div>
+            <ion-item>
+              <ion-input type="password" placeholder="Password" [(ngModel)]="newuser.password"></ion-input>
+            </ion-item>
+            <div class="spacer" style="height: 10px;"></div>
+            <ion-item>
+              <ion-input type="name" placeholder="First name" [(ngModel)]="newuser.firstName"></ion-input>
+            </ion-item>
+            <div class="spacer" style="height: 5px;"></div>
+            <ion-item>
+              <ion-input type="name" placeholder="Last name" [(ngModel)]="newuser.lastName"></ion-input>
+            </ion-item>
+            <div class="spacer" style="height: 10px;"></div> 
+            <button ion-button block round outline color="light" (click)="signup()">Sign up</button>
+            <div class="spacer" style="height: 10px;"></div>
+            
+            <p>OR</p>
+            
+            <button ion-button clear full color="light" (click)="signin()">Already a member ? Login</button>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>

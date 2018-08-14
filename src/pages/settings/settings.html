@@ -1,0 +1,64 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Account settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  
+
+   <ion-list>
+    <!-- <ion-item>
+          <ion-icon name="notifications" item-start  color="secondary"></ion-icon>
+          <ion-label>Enable Notificatons</ion-label>
+          <ion-toggle color="secondary"></ion-toggle>
+            
+       </ion-item> -->
+ 
+       <ion-item>
+          <ion-icon name="locate" item-start  color="secondary"></ion-icon>
+          <ion-label>Enable Location</ion-label>
+          <ion-toggle color="secondary"></ion-toggle>
+       </ion-item>
+ 
+    </ion-list>
+
+    <ion-list>   
+    <button ion-item   (click)="editEmail()">
+        <ion-icon name="mail" item-start  color="secondary"></ion-icon>
+          Edit E-mail
+     </button>
+
+     <button ion-item   (click)="editPassword()">
+        <ion-icon name="lock" item-start  color="secondary"></ion-icon>
+          Edit Password
+     </button>
+
+
+     <button ion-item >
+        <ion-icon name="trash" item-start  color="red"></ion-icon>
+           Delete account
+     </button>
+
+    </ion-list> 
+
+    <button ion-item (click) = "goToAbout()" >
+      <ion-icon name="information-circle" item-start  color="secondary"></ion-icon>
+          About Us
+   </button>
+
+    <button ion-item >
+        <ion-icon name="information" item-start  color="secondary"></ion-icon>
+           Terms & Conditions
+     </button>
+
+</ion-content>
