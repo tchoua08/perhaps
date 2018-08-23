@@ -2,12 +2,7 @@ import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController,Searchbar } from 'ionic-angular';
 
 
-/**
- * Generated class for the SearchModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({

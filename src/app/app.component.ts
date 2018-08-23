@@ -3,34 +3,45 @@ import { Platform ,Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-import { Network } from '@ionic-native/network';
-import { NetworkProvider } from '../providers/network/network';
+import { AuthProvider } from '../providers/auth/auth';
+
 // import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = 'LoginPage';
-
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private storage:Storage,
-    private network:Network,public events: Events,private networkProvider:NetworkProvider) {
+  rootPage:any ;
+  credentials =null;
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+   public events: Events,private storage:Storage,public authservice :AuthProvider) {
     platform.ready().then(() => {
-
-      this.networkProvider.initializeNetworkEvents();
-
-      // Offline event
-   this.events.subscribe('network:offline', () => {
-       alert('network:offline ==> '+this.network.type);    
-   });
-
-   // Online event
-   this.events.subscribe('network:online', () => {
-       alert('network:online ==> '+this.network.type);        
-   });
-      
       statusBar.styleDefault();
       splashScreen.hide();
+      
+      setTimeout(() => {
+        this.storage.get('perhaps_credentials').then((val) => {
+          console.log(val);
+          if(val == null){
+            this.rootPage = 'LoginPage';
+          }else{
+            this.rootPage = 'TabsPage';
+          }
+    
+        })
+      },150); 
     });
+  }
+
+  checkAuth(){
+    this.storage.get('perhaps_credentials').then((val) => {
+      console.log(val);
+      if(val == null){
+        this.rootPage = 'LoginPage';
+      }else{
+        this.rootPage = 'TabsPage';
+      }
+
+    })
   }
 }

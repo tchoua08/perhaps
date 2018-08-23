@@ -1,4 +1,7 @@
 page-messages {
+  body.keyboard-open.platform-ios .bar-footer {
+    bottom: 36px;
+}
     $userBackgroundColor: #4B0082;
     $toUserBackgroundColor: #fff;
   
@@ -9,7 +12,7 @@ page-messages {
     ion-footer {
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.11);
       background-color: #fff;
-      height: 60px;
+      height: 55px;
     }
   
     ion-spinner {

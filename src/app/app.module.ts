@@ -12,6 +12,7 @@ import { FilePath } from '@ionic-native/file-path'
 import { File } from '@ionic-native/file';
 
 
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -25,10 +26,12 @@ import { ImghandlerProvider } from '../providers/imghandler/imghandler';
 import { CardProvider } from '../providers/card/card';
 import { ChatProvider } from '../providers/chat/chat';
 import { EventsProvider } from '../providers/events/events';
-import { NetworkProvider } from '../providers/network/network'; //firebase setup
-
+import { NetworkProvider } from '../providers/network/network'; 
+import { StorageProvider } from '../providers/storage/storage';
 
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { PinDialog } from '@ionic-native/pin-dialog';
+
 
 
 @NgModule({
@@ -40,8 +43,9 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
     IonicModule.forRoot(MyApp,{tabsHideOnSubPages:true,scrollPadding: false,
       scrollAssist: false}),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    IonicStorageModule.forRoot(),
     AngularFireAuthModule,
+    IonicStorageModule.forRoot(),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,7 +68,9 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
     SocialSharing,
     Network,
     NetworkProvider,
-    LaunchNavigator
+    LaunchNavigator,
+    StorageProvider,
+    PinDialog
 
   ]
 })

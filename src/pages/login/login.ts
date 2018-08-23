@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,ToastController,LoadingController} from 'ionic-angular';
 import {usercreds} from '../../models/interfaces/usercreds'
 import {AuthProvider} from '../../providers/auth/auth'
-import firebase from 'firebase';
-// import { Facebook } from '@ionic-native/facebook'
-// import { Storage } from '@ionic/storage';
+import { StorageProvider } from '../../providers/storage/storage';
 
-import { FacebookAuthProvider } from '@firebase/auth-types';
+// import { Facebook } from '@ionic-native/facebook'
+// import { FacebookAuthProvider } from '@firebase/auth-types';
+
+
 import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
@@ -18,7 +19,7 @@ export class LoginPage {
   credentials = {} as usercreds;
   constructor(public navCtrl: NavController, public navParams: NavParams,public authservice:AuthProvider,
   private toastCtrl: ToastController,public loadingCtrl: LoadingController,
-   private userservice:UserProvider
+   private userservice:UserProvider,private storageservice:StorageProvider
     ) {
   }
 
@@ -29,6 +30,7 @@ export class LoginPage {
    
     // console.log('ionViewDidLoad LoginPage');
   }
+  
 
   signin(){
     
@@ -40,7 +42,7 @@ export class LoginPage {
 
     loader.present();
    this.authservice.login(this.credentials).then((res:any) => {
-      // this.storage.set('usercreds',this.credentials);
+      this.storageservice.storeCredentials(this.credentials);
       this.navCtrl.setRoot('TabsPage');
     })
     .catch(err =>{

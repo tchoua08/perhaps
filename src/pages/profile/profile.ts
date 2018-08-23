@@ -2,6 +2,7 @@ import { Component,NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams,ActionSheetController,LoadingController,AlertController,ToastController,App} from 'ionic-angular';
 import {UserProvider} from '../../providers/user/user'
 import { ImghandlerProvider } from '../../providers/imghandler/imghandler'
+import { StorageProvider } from '../../providers/storage/storage';
 
 
 /**
@@ -22,7 +23,7 @@ export class ProfilePage {
   lastname;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl:ActionSheetController,
   public userservice:UserProvider,public loadingCtrl:LoadingController,public zone:NgZone,public alertCtrl:AlertController,
-  public toastCtrl:ToastController,public imghandler:ImghandlerProvider,private app:App) {
+  public toastCtrl:ToastController,public imghandler:ImghandlerProvider,private app:App,private storageservice:StorageProvider) {
     this.loaduserdetails();
   }
 
@@ -163,7 +164,8 @@ export class ProfilePage {
  }
 
  logout(){
-  console.log('logging out...')
+  console.log('logging out...');
+  this.storageservice.deleteCredentials();
   this.app.getRootNav().setRoot('LoginPage');
  }
 

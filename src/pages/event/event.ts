@@ -34,25 +34,26 @@ export class EventPage {
   following=null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public ref: ChangeDetectorRef,private socialSharing: SocialSharing,
     public eventservice:EventsProvider,private launchNavigator:LaunchNavigator) {
+      this.id = this.navParams.get('id');
+      this.eventservice.getEventById(this.id).then((res:any)=>{
+        this.event.title = res.title;
+        this.event.description = res.description;
+        this.event.ticket_price = res.ticket_price;
+        this.event.startDate = res.startDate;
+        this.event.address = res.address + "," + res.city;
+        this.event.following = res.following;
+        this.event.endDate = res.endDate;
+        this.event.image = res.image;
+        this.event.following = res.following;
+    })
+    this.eventservice.checkIfFollow(this.id).then((res:any)=>{
+       this.following = res;
+       if(res == true){ this.buttonColor = '#1d334a',  this.color = '#FFFFFF'}else{ this.icolor='#1d334a'}
+     })
   }
 
-  ionViewWillEnter() {
-    this.id = this.navParams.get('id');
-    this.eventservice.getEventById(this.id).then((res:any)=>{
-      this.event.title = res.title;
-      this.event.description = res.description;
-      this.event.ticket_price = res.ticket_price;
-      this.event.startDate = res.startDate;
-      this.event.address = res.address + "," + res.city;
-      this.event.following = res.following;
-      this.event.endDate = res.endDate;
-      this.event.image = res.image;
-      this.event.following = res.following;
-  })
-  this.eventservice.checkIfFollow(this.id).then((res:any)=>{
-     this.following = res;
-     if(res == true){ this.buttonColor = '#1d334a',  this.color = '#FFFFFF'}else{ this.icolor='#1d334a'}
-   })
+  ionViewDidLoad() {
+  
   }
 
   addTicket(){

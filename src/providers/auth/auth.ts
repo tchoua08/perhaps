@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {usercreds} from '../../models/interfaces/usercreds'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import { ToastController } from 'ionic-angular';
 
 
@@ -29,7 +29,7 @@ export class AuthProvider {
         position: 'botttom'
        });
      toast.present();
-    
+       resolve(true);
     }).catch(err =>{
     let toast = this.toastCtrl.create({
       message: err,
