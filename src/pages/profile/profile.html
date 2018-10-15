@@ -12,7 +12,7 @@
   <ion-card class="image"  *ngIf="avatar">
     <img class="image" src="{{avatar}}"/>
  </ion-card>
-  <ion-item>
+  <ion-item text-wrap>
       <h1>{{firstname}} {{lastname}}</h1>
     <button ion-button color="secondary" outline item-end (click)="editProfile()">Edit</button>
   </ion-item>

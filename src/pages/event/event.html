@@ -78,7 +78,8 @@
       <ion-item>
         <ion-icon name="pricetag" item-left large color="secondary" ></ion-icon>
         <h2>{{event.ticket_price}}£</h2>
-        <ion-icon name="remove" item-right small color="dark" (click)="removeTicket()"  >{{tickets}}</ion-icon>
+        <ion-icon name="remove" item-right small color="dark" (click)="removeTicket()"  ></ion-icon>
+        <ion-badge color="secondary" item-right>{{tickets}}</ion-badge>
         <ion-icon name="add" item-right small  color="dark" (click)="addTicket()"></ion-icon>
         
       </ion-item>
@@ -89,11 +90,8 @@
       </button>
       
       <ion-item>
-        <button ion-button icon-left outline  item-end color="secondary">
-          <ion-icon name="mail" ></ion-icon>
-          Contact
-        </button>
-        <button ion-button icon-left outline  [ngStyle]="{'background-color': buttonColor,'color':color}"  color="secondary" (click)="follow()">
+    
+        <button ion-button icon-left outline item-end [ngStyle]="{'background-color': buttonColor,'color':color}"  color="secondary" (click)="follow()">
             <ion-icon name="heart" color="red" [ngStyle]="{'color':icolor}"></ion-icon>
             
             Follow
@@ -102,6 +100,6 @@
  
     </ion-card>
 
-    <button ion-button full color="secondary">Book now</button>
+    <button ion-button full color="secondary" (click)="bookTicket()">Book now</button>
   </ion-content>
   

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { Events } from 'ionic-angular';
 
 
@@ -7,6 +7,7 @@ import { Events } from 'ionic-angular';
 export class ChatProvider {
   // fireroom = firebase.database().ref('/rooms') 
   firemsg = firebase.database().ref('/messages')
+  firerooms = firebase.database().ref('/rooms')
   messages=[];
   constructor(public events:Events) {
     
@@ -20,6 +21,14 @@ export class ChatProvider {
         timestamp: firebase.database.ServerValue.TIMESTAMP
       }).then(() => {
           resolve(true);
+          this.firerooms.child(firebase.auth().currentUser.uid).set({
+            modified:firebase.database.ServerValue.TIMESTAMP,
+            readbyUser:true,
+            readybyAdmin:false,
+            lastmessage:msg,
+            senderName: firebase.auth().currentUser.displayName,
+            senderId:firebase.auth().currentUser.uid
+          })
           }).catch((err) => {
             alert(err);
         })

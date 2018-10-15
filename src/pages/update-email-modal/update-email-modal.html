@@ -7,12 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>updateEmailModal</ion-title>
+    <ion-title>Update E-mail</ion-title>
+
+    <ion-buttons left>
+    
+        <button ion-button icon-only (click)="closeModal()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <ion-list >
+    
+        <ion-item>
+            <ion-label stacked >New E-mail</ion-label>
+            <ion-input type="email"  [(ngModel)]='email' ></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label stacked >Re-type new E-mail</ion-label>
+          <ion-input type="email"  [(ngModel)]='email_re' ></ion-input>
+        </ion-item>
+    
+        <button (click)="updateEmail()" ion-button block >Save New Email</button>
+      </ion-list>
 
 </ion-content>

@@ -1,0 +1,66 @@
+<!--
+  Generated template for the PaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Checkout</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="background">
+    <ion-item-divider>
+      Booking Information
+    </ion-item-divider>
+
+    <ion-item >
+        Event:
+        <h2 ion-text color="secondary">{{event.title}} </h2>
+        <!-- <p>{{event.description}}</p> -->
+     </ion-item>
+
+
+     <ion-item>
+        Tickets Quantity:
+        <h2 ion-text color="secondary">x{{tickets}} </h2>
+     </ion-item>
+   
+     <ion-item>
+        Total:
+        <h2 ion-text color="secondary">{{total}}£ </h2>
+     </ion-item>
+  
+    <ion-item-divider>
+        Payment Method
+      </ion-item-divider> 
+  <ion-list radio-group>
+
+    <img class="pay-type" *ngIf="paymentMethod == 'paypal'" src="assets/imgs/paypal.png"/>
+
+    <img   class="pay-type" *ngIf="paymentMethod != 'paypal'" src="assets/imgs/stripe.png"/>
+   
+    <ion-item>
+       
+      <ion-label>PayPal</ion-label>
+    
+      <ion-radio checked="true" value="paypal" (ionSelect)="payWith('paypal')"></ion-radio>
+    </ion-item>
+    
+  
+    <ion-item>
+      <ion-label>Credit/Debit Card</ion-label>
+      <ion-radio value="card"  (ionSelect)="payWith('card')"></ion-radio>
+    </ion-item>
+    
+  
+
+  </ion-list>
+  <button ion-button block outline (click)="checkout()">Checkout ({{total}}£)</button>
+    <!-- <button ion-button color="primary" outline (click)="pay()">Pay 20$</button> -->
+    
+</ion-content>

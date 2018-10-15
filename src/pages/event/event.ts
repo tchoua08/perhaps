@@ -1,5 +1,5 @@
 import { Component,ViewChild,ChangeDetectorRef} from '@angular/core';
-import { IonicPage, NavController, NavParams ,Content} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,Content, ToastController} from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import {EventsProvider} from '../../providers/events/events';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
@@ -33,7 +33,7 @@ export class EventPage {
   id = null;
   following=null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public ref: ChangeDetectorRef,private socialSharing: SocialSharing,
-    public eventservice:EventsProvider,private launchNavigator:LaunchNavigator) {
+    public eventservice:EventsProvider,private launchNavigator:LaunchNavigator,public toastCtrl:ToastController) {
       this.id = this.navParams.get('id');
       this.eventservice.getEventById(this.id).then((res:any)=>{
         this.event.title = res.title;
@@ -61,7 +61,12 @@ export class EventPage {
   }
 
   removeTicket(){
-    this.tickets --;
+    if(this.tickets <= 0 ){
+      return;
+    }else{
+      this.tickets --;
+    }
+    
   }
 
   follow(){
@@ -102,7 +107,20 @@ export class EventPage {
   
 
   bookTicket(){
-
+    if(this.tickets <=0){
+      let toast = this.toastCtrl.create({
+        message: 'Please enter the amount of tickets you want to book',
+        duration: 3000,
+        position: 'top'
+      });
+     toast.present();
+    }else{
+      this.navCtrl.push('PaymentPage',{
+        event:this.event,
+        tickets:this.tickets
+      })
+    }
+   
   }
 
   share(){
@@ -112,5 +130,8 @@ export class EventPage {
   back(){
     this.navCtrl.pop();
   }
+
+
+
 }
 

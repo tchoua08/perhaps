@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams ,ToastController,LoadingController}
 import {usercreds} from '../../models/interfaces/usercreds'
 import {AuthProvider} from '../../providers/auth/auth'
 import { StorageProvider } from '../../providers/storage/storage';
-
-// import { Facebook } from '@ionic-native/facebook'
+import firebase from 'firebase/app'
+import { Facebook } from '@ionic-native/facebook'
 // import { FacebookAuthProvider } from '@firebase/auth-types';
 
 
@@ -19,7 +19,7 @@ export class LoginPage {
   credentials = {} as usercreds;
   constructor(public navCtrl: NavController, public navParams: NavParams,public authservice:AuthProvider,
   private toastCtrl: ToastController,public loadingCtrl: LoadingController,
-   private userservice:UserProvider,private storageservice:StorageProvider
+   private userservice:UserProvider,private storageservice:StorageProvider,private facebook:Facebook
     ) {
   }
 
@@ -62,24 +62,32 @@ export class LoginPage {
     this.navCtrl.push('RegisterPage')
   }
 
-  // facebookLogin(): Promise<any> {
-  //   return this.facebook.login(['email'])
-  //     .then( response => {
-  //       const facebookCredential = firebase.auth.FacebookAuthProvider
-  //         .credential(response.authResponse.accessToken);
+  facebookLogin(): Promise<any> {
+    return this.facebook.login(['email'])
+      .then( response => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);
   
-  //       firebase.auth().signInWithCredential(facebookCredential)
-  //         .then( success => { 
-  //           console.log("Firebase success: " + JSON.stringify(success)); 
-  //         });
+        firebase.auth().signInWithCredential(facebookCredential)
+          .then( success => { 
+            console.log("Firebase success: " + JSON.stringify(success.providerId)); 
+        
+            console.log();
+            var user = {
+              firstName:success.displayName,
+              lastName:'',
+              photoURL:success.photoURL+'?width=1024&height=1024',
+              email:success.email,
+            }
+            this.userservice.addFacebookUser(user);
+            this.navCtrl.setRoot('TabsPage');
+          });
   
-  //     }).catch((error) => { console.log(error) });
-  // }
+      }).catch((error) => { console.log(error) });
+  }
 
   passwordreset(){
     this.userservice.passwordReset();
   }
- 
-
 
 }

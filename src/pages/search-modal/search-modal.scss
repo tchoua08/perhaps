@@ -1,3 +1,23 @@
 page-search-modal {
 
+   
+      
+      .background{
+          background-color: whitesmoke
+      }
+
+      ion-spinner {
+      
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: auto;
+        // top:50%;
+      }
+
+      .msg{
+        font-size: 1.9rem;
+        margin-top:50%;
+    }
+
 }

@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
-/**
- * Generated class for the UpdateEmailModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -15,11 +12,41 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UpdateEmailModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  email;
+  email_re;
+  constructor(public navCtrl: NavController, public navParams: NavParams , private viewCtrl : ViewController, private authservice:AuthProvider,
+    public toastCtrl :ToastController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UpdateEmailModalPage');
+    
+  }
+
+  closeModal(){
+    this.viewCtrl.dismiss();
+  }
+
+
+  updateEmail(){
+    if(this.email != this.email_re){
+      let toast = this.toastCtrl.create({
+        message: "Emails doesn't match, Please type again new email.",
+        duration: 3500,
+        position: 'botttom'
+       });
+     toast.present();
+    }else{
+      this.authservice.updateEmail(this.email).then(()=>{
+
+    }).catch(err=>{
+      let toast = this.toastCtrl.create({
+        message: err,
+        duration: 3500,
+        position: 'botttom'
+       });
+       toast.present();
+    })
+    }
   }
 
 }

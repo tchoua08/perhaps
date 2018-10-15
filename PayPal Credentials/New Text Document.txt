@@ -1,0 +1,8 @@
+SANDBOX API CREDENTIALS
+Sandbox account ykaldanis-facilitator@gmail.com
+Client ID: AVh0CZ89g4kzjCU1scXWgz5ZYAT6Wf0-dfmTOaP_dsCERXTXZMMFMh3yiVoxvWgdaSZh3Vo84gKuMMTw
+
+
+Live:
+PayPal account : ykaldanis@gmail.com
+Client ID: AY8CO5ynKHeFxdR5ndaskN6HzzCiL8m_3ZgdkL73uT4uB3Fn13xnnzhBBHqNqb7zoarfaDh2bYJuFUWp

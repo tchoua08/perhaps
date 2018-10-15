@@ -39,7 +39,9 @@ export class ReviewsPage {
     loading.present();
     this.eventservice.getFollowingEvents().then((res:any)=>{
       this.evnts = res;
-
+      
+   }).catch(err=>{
+     console.log(err);
    }); 
 
     loading.dismiss();

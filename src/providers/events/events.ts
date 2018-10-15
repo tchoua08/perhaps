@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { Events } from 'ionic-angular';
 
 @Injectable()
@@ -65,12 +65,21 @@ export class EventsProvider {
           let temparr = [];
           for (var key in userdata) {
             this.getEventById(userdata[key].event_id).then((res:any)=>{
-              temparr.push(res);
+              if(res == null){
+                this.unfollow(userdata[key].event_id) //checks if user follows deletead Event.
+              }else{
+                temparr.push(res);
+              }
+              
+            }).catch(err=>{
+              console.log(err);
             })
           }
           resolve(temparr);
        
         }).catch((err) => {
+          
+          console.log(err);
           reject(err);
         })
       })
@@ -95,8 +104,7 @@ export class EventsProvider {
     }
 
     unfollow(event_id){
-    
-      this.firefollow.child(firebase.auth().currentUser.uid).child(event_id).remove();
+      this.firefollow.child(firebase.auth().currentUser.uid).child(event_id).remove(); //deletes following event
     }
 
 
@@ -119,5 +127,21 @@ export class EventsProvider {
       this.firedata.child(event_id).update({
         following :following
       })
+    }
+
+    searchEvent(start,end){
+      var promise = new Promise((resolve, reject) => { 
+        this.firedata.orderByChild('title').startAt(start).endAt(end).once("value", function(snapshot) {
+          let userdata = snapshot.val();
+          let temparr = [];
+          for (var key in userdata) {
+            temparr.push(userdata[key]);
+          }
+          resolve(temparr);
+        }).catch((err) => {
+          reject(err);
+        })
+      });
+      return promise;
     }
 }

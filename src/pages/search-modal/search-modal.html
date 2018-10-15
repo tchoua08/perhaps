@@ -4,8 +4,8 @@
   
   <ion-searchbar  #search
   (ionInput)="onInput($event)"
-  [(ngModel)]="query"
-  [showCancelButton]="shouldShowCancel">
+  (ionCancel)="onCancel($event)"
+  [(ngModel)]="query">
 </ion-searchbar>
 <ion-buttons left>
     
@@ -20,4 +20,25 @@
 
 <ion-content padding>
 
+   
+  <ion-spinner  name="circles" *ngIf="spinner" color="secondary"></ion-spinner>
+
+    <ion-list>
+        <button ion-item *ngFor="let event of events"  (click)="gotoEvent(event.id)">
+          {{ event.title }}
+        </button>  
+      </ion-list>
+
+<!-- 
+      <ion-row *ngIf="events === undefined || events.length == 0">
+          <ion-col text-center>
+            <div class="msg">
+              <ion-icon name="md-bulb"></ion-icon>
+              <p>Search Events </p>
+            </div>
+           
+              
+          </ion-col>
+        </ion-row> -->
+    
 </ion-content>

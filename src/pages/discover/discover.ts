@@ -20,16 +20,19 @@ import { usercreds } from '../../models/interfaces/usercreds';
 })
 export class DiscoverPage {
   credentials = {} as usercreds;
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl:ModalController,public eventservice:EventsProvider,
   private network:Network,private authservice:AuthProvider,public events:Events,private storageservice:Storage,private alertCtrl: AlertController) {
-    this.storageservice.get('perhaps_credentials').then((data)=>{
-       this.credentials.password = data.password;
-       this.credentials.email = data.email;
-       this.authservice.login(this.credentials).then(()=>{
-       }).catch(err=>{
-         this.presentAlert();
-       })
-    })
+    // this.storageservice.get('perhaps_credentials').then((data)=>{
+    //   this.credentials.password = '';
+    //     this.credentials.email = '';
+    //    this.credentials.password = data.password;
+    //    this.credentials.email = data.email;
+    //    this.authservice.login(this.credentials).then(()=>{
+    //    }).catch(err=>{
+    //      this.presentAlert();
+    //    })
+    // })
   }
 
   ionViewDidLoad() {

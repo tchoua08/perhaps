@@ -4,17 +4,15 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { IonicStorageModule } from '@ionic/storage';
+
+
 import { Network } from '@ionic-native/network';
-
-
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path'
 import { File } from '@ionic-native/file';
-
-
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Crop } from '@ionic-native/crop';
 
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import {AngularFireModule} from 'angularfire2';
@@ -28,6 +26,10 @@ import { ChatProvider } from '../providers/chat/chat';
 import { EventsProvider } from '../providers/events/events';
 import { NetworkProvider } from '../providers/network/network'; 
 import { StorageProvider } from '../providers/storage/storage';
+import { Facebook } from '@ionic-native/facebook'
+import { Stripe } from '@ionic-native/stripe';
+import { PayPal} from '@ionic-native/paypal';
+
 
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { PinDialog } from '@ionic-native/pin-dialog';
@@ -70,7 +72,12 @@ import { PinDialog } from '@ionic-native/pin-dialog';
     NetworkProvider,
     LaunchNavigator,
     StorageProvider,
-    PinDialog
+    PinDialog,
+    Facebook,
+    Stripe,
+    Crop,
+    PayPal,
+
 
   ]
 })

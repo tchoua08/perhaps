@@ -1,7 +1,6 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {usercreds} from '../../models/interfaces/usercreds'
 import firebase from 'firebase/app'
 import { ToastController } from 'ionic-angular';
 

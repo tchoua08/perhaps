@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController,App} from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController,App,ViewController} from 'ionic-angular';
 import { PinDialog } from '@ionic-native/pin-dialog';
 import { AuthProvider } from '../../providers/auth/auth';
 import { StorageProvider } from '../../providers/storage/storage';
 
-/**
- * Generated class for the UpdatePasswordModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
+
 
 @IonicPage()
 @Component({
@@ -23,11 +19,15 @@ export class UpdatePasswordModalPage {
   pass2;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private pinDialog: PinDialog,private authserrvice:AuthProvider,
-  public toastCtrl:ToastController,private storageservice:StorageProvider,private app:App) {
+  public toastCtrl:ToastController,private storageservice:StorageProvider,private app:App, private viewCtrl :ViewController) {
     this.pinDialog.prompt('Enter your PIN', 'Verify PIN', ['OK', 'Cancel']).then(
       (result: any) => {
         if (result.buttonIndex == 1) console.log('User clicked OK, value is: ', result.input1);
-        else if(result.buttonIndex == 2) console.log('User cancelled');
+        else if(result.buttonIndex == 2){
+          console.log('User cancelled');
+          this.viewCtrl.dismiss();
+
+        } 
       }
     );
   }
@@ -52,8 +52,19 @@ export class UpdatePasswordModalPage {
           this.storageservice.deleteCredentials();
           this.app.getRootNav().setRoot('LoginPage');
         }
+      }) .catch(err =>{
+        let toast = this.toastCtrl.create({
+          message: err,
+          duration: 3500,
+          position: 'bottom'
+        });
+       toast.present();
       })
     }
+  }
+
+  closeModal(){
+    this.viewCtrl.dismiss();
   }
  
 }

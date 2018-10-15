@@ -16,6 +16,12 @@ export class CardsPage {
     this.events.subscribe('card_delete',()=>{
       this.loadCards();
     })
+
+    this.events.subscribe('newcard',()=>{
+      console.log('edw')
+      this.loadCards();
+    })
+    
     this.loadCards();
   }
 
@@ -23,7 +29,7 @@ export class CardsPage {
     
     this.cardservice.getCards().then((res:any)=>{
       this.cards = res;
-      console.log(this.cards);
+      
     })
   }
 

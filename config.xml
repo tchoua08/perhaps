@@ -94,5 +94,15 @@
     <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
     <allow-navigation href="http://192.168.1.7:8100" />
     <allow-navigation href="http://192.168.1.9:8100" />
-    <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-plugin-facebook4" spec="^2.3.0">
+        <variable name="APP_ID" value="444934472604647" />
+        <variable name="APP_NAME" value="BoredInLondon" />
+    </plugin>
+    <allow-navigation href="http://192.168.1.129:8100" />
+    <allow-navigation href="http://192.168.1.40:8101" />
+    <allow-navigation href="http://192.168.1.50:8100" />
+    <plugin name="cordova-plugin-crop" spec="^0.4.0" />
+    <plugin name="com.paypal.cordova.mobilesdk" spec="^3.5.0" />
+    <allow-navigation href="http://192.168.1.32:8100" />
+    <engine name="android" spec="6.3.0" />
 </widget>
