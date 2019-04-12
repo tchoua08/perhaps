@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "852337805820",
+    "firebase_url": "https://boredinlondon-761c2.firebaseio.com",
+    "project_id": "boredinlondon-761c2",
+    "storage_bucket": "boredinlondon-761c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852337805820:android:822e10efc7ce46a0",
+        "android_client_info": {
+          "package_name": "com.perhaps.london"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852337805820-qqa12rg9jsolc099k9a7dreal0oaufn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM5rXU5zQcGRgOnz1lcNqxpoc0HRqcfPo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

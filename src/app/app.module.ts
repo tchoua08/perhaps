@@ -29,6 +29,10 @@ import { StorageProvider } from '../providers/storage/storage';
 import { Facebook } from '@ionic-native/facebook'
 import { Stripe } from '@ionic-native/stripe';
 import { PayPal} from '@ionic-native/paypal';
+import { FCM } from '@ionic-native/fcm';
+
+
+
 
 
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
@@ -77,8 +81,7 @@ import { PinDialog } from '@ionic-native/pin-dialog';
     Stripe,
     Crop,
     PayPal,
-
-
+    FCM
   ]
 })
 export class AppModule {}

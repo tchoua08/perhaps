@@ -17,7 +17,7 @@ export class UserProvider {
     var promise = new Promise((resolve,reject) =>{
       this.afireauth.auth.createUserWithEmailAndPassword(newuser.email,newuser.password).then(()=>{
         this.afireauth.auth.currentUser.updateProfile({
-          displayName: newuser.firstName +" "+ newuser.LastName,
+          displayName: newuser.firstName + newuser.LastName,
           photoURL:'http://www.freeiconspng.com/uploads/person-icon-8.png'
         }).then(() => {
           this.firedata.child(this.afireauth.auth.currentUser.uid).set({

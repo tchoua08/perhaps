@@ -41,12 +41,13 @@ export class MessagesPage {
 
   sendMsg(){
 
-    if (this.newmessage == ''){
+    if (this.newmessage == '' || this.newmessage == null){
       return -1;
     }else{
       this.chatservice.addNewMessage(this.newmessage).then(() => {
-        this.content.scrollToBottom();
         this.newmessage = '';
+        this.content.scrollToBottom();
+        
       })
 
     }

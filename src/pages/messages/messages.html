@@ -13,9 +13,8 @@
 
     <div *ngFor="let msg of messages"
          class="message"
-       
-         [class.right]=" msg.sentby === user.uid "
-        >
+         [class.left]="msg.senderId != user.uid"
+         [class.right]=" msg.senderId === user.uid">
       <img class="user-img" [src]="user.photoURL" alt="" src="">
      
       <div class="msg-detail">
