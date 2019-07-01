@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController,Events,AlertController  } from 'ionic-angular';
 import {EventsProvider} from '../../providers/events/events'
-import {Network} from '@ionic-native/network'
 import { AuthProvider } from '../../providers/auth/auth';
 import { Storage } from '@ionic/storage';
 import { usercreds } from '../../models/interfaces/usercreds';
@@ -22,7 +21,7 @@ export class DiscoverPage {
   credentials = {} as usercreds;
  
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl:ModalController,public eventservice:EventsProvider,
-  private network:Network,private authservice:AuthProvider,public events:Events,private storageservice:Storage,private alertCtrl: AlertController) {
+  private authservice:AuthProvider,public events:Events,private storageservice:Storage,private alertCtrl: AlertController) {
     // this.storageservice.get('perhaps_credentials').then((data)=>{
     //   this.credentials.password = '';
     //     this.credentials.email = '';

@@ -39,14 +39,15 @@
     <ion-item>
           <!-- <ion-icon name="pricetag" item-left large ></ion-icon> -->
           <h2>What will Happen?</h2>
-          <p text-wrap>{{event.description}} </p>
+          <p text-wrap>{{description}} </p>
          
-      </ion-item>
-      <!-- <ion-item color>
-        <ion-icon name="checkmark-circle" item-start color="secondary"></ion-icon>
-        Attending
-        <ion-badge item-end color="secondary">{{100}}</ion-badge>
-    </ion-item> -->
+    </ion-item>
+      
+    <ion-item >
+      <button ion-button small clear item-end (click)="showMore()">
+        {{showButtonTag}}
+      </button>
+    </ion-item>
 
     <ion-item>
       <ion-icon name="heart" item-start color="secondary"></ion-icon>
@@ -99,7 +100,12 @@
       </ion-item>
  
     </ion-card>
-
-    <button ion-button full color="secondary" (click)="bookTicket()">Book now</button>
+   
+    
   </ion-content>
   
+  <ion-footer>
+    <ion-toolbar>
+      <button ion-button full color="secondary" (click)="bookTicket()">Book now</button>
+    </ion-toolbar>
+  </ion-footer>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Stripe } from '@ionic-native/stripe';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -20,7 +19,7 @@ export class PaymentPage {
   event = null;
   tickets = null;
   total = null;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private stripe: Stripe, private payPal:PayPal) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private payPal:PayPal) {
     this.event = this.navParams.get('event');
     this.tickets = this.navParams.get('tickets');
     this.total = this.tickets * this.event.ticket_price;
@@ -70,29 +69,29 @@ export class PaymentPage {
   }
 
 
-  pay(){
-    this.stripe.setPublishableKey('pk_test_YE1y4I4uPoRVkOKLPWThUOUS');
+  // pay(){
+  //   this.stripe.setPublishableKey('pk_test_YE1y4I4uPoRVkOKLPWThUOUS');
 
-    let card = {
-    number: '4242424242424242',
-    expMonth: 12,
-    expYear: 2020,
-    cvc: '220'
-    };
+  //   let card = {
+  //   number: '4242424242424242',
+  //   expMonth: 12,
+  //   expYear: 2020,
+  //   cvc: '220'
+  //   };
 
-    // this.stripe.createCardToken(card)
-    //   .then(token => console.log(token.id))
-    //   .catch(error => console.log(error));
-    // 
+  //   // this.stripe.createCardToken(card)
+  //   //   .then(token => console.log(token.id))
+  //   //   .catch(error => console.log(error));
+  //   // 
 
-    this.stripe.createCardToken(card).then((token)=>{
-      console.log(token.id);
-      const payment = {token,amount:this.amount}
-      this.firedata.child(firebase.auth().currentUser.uid).push(payment);
-    }).catch(err=>{
-      console.log(err);
-    })
-  }
+  //   this.stripe.createCardToken(card).then((token)=>{
+  //     console.log(token.id);
+  //     const payment = {token,amount:this.amount}
+  //     this.firedata.child(firebase.auth().currentUser.uid).push(payment);
+  //   }).catch(err=>{
+  //     console.log(err);
+  //   })
+  // }
 
 
 }

@@ -12,7 +12,7 @@ import { Events } from 'ionic-angular';
 export class ReviewsPage {
 
 
-  evnts=[];
+  evnts;
   empty = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public eventservice: EventsProvider,public loadingCtrl:LoadingController,
@@ -39,6 +39,7 @@ export class ReviewsPage {
     loading.present();
     this.eventservice.getFollowingEvents().then((res:any)=>{
       this.evnts = res;
+      console.log(this.evnts);
       
    }).catch(err=>{
      console.log(err);

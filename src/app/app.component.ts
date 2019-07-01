@@ -27,17 +27,28 @@ export class MyApp {
        this.credentials.password='';
       
     
-       fcm.subscribeToTopic('all');
-       this.fcm.getToken().then(token => {
-        alert(token);
-        console.log(token);
-      });
+      //  fcm.subscribeToTopic('all');
+      //  this.fcm.getToken().then(token => {
+        
+      //   // alert(token);
+      // });
 
-      this.fcm.onNotification().subscribe(data=>{
-        alert(data);
-        console.log(data);
-      })
+      // this.fcm.onNotification().subscribe(data=>{
        
+      //   if(data.wasTapped){
+      //     //Notification was received on device tray and tapped by the user.
+      //     console.log(JSON.stringify(data));
+      //     alert( JSON.stringify(data) );
+         
+      //   }else{
+      //     //Notification was received in foreground. Maybe the user needs to be notified.
+      //     alert( JSON.stringify(data) );
+      //   }
+      // })
+      
+      // this.fcm.onTokenRefresh().subscribe(token=>{
+      //   alert(token);
+      // })
       statusBar.styleDefault();
       splashScreen.hide();
       

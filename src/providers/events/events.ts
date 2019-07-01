@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import { Events } from 'ionic-angular';
 
+import moment from 'moment';
+
 @Injectable()
 export class EventsProvider {
   firedata = firebase.database().ref('/Events');
   firefollow = firebase.database().ref('/Follows');
-
+  
   constructor(public events:Events) {
    
   }
@@ -35,8 +37,9 @@ export class EventsProvider {
 			let temparr = [];
 			for (var key in eventdata) {
 				temparr.push(eventdata[key]);
-			}
-			resolve(temparr);
+      }
+      console.log(temparr);
+			resolve(temparr.reverse());
      })
 		})
 			
@@ -48,7 +51,8 @@ export class EventsProvider {
    
       var promise = new Promise((resolve, reject) => {
         this.firedata.child(id).once('value', (snapshot) => {
-          resolve(snapshot.val());
+         resolve(snapshot.val());
+      
         }).catch((err) => {
           reject(err);
           })
@@ -59,30 +63,52 @@ export class EventsProvider {
 
 
     getFollowingEvents(){
+      
       var promise = new Promise((resolve, reject) => {
+        let eventIds =[];
+        let ret =[];
         this.firefollow.child(firebase.auth().currentUser.uid).orderByChild('event_id').once('value', (snapshot) => {
           let userdata = snapshot.val();
-          let temparr = [];
-          for (var key in userdata) {
-            this.getEventById(userdata[key].event_id).then((res:any)=>{
-              if(res == null){
-                this.unfollow(userdata[key].event_id) //checks if user follows deletead Event.
-              }else{
-                temparr.push(res);
-              }
-              
-            }).catch(err=>{
-              console.log(err);
-            })
+      
+          for(var key in userdata){
+            eventIds.push(userdata[key].event_id);
           }
-          resolve(temparr);
-       
-        }).catch((err) => {
-          
-          console.log(err);
-          reject(err);
+
+          eventIds.reverse();
+
+        }).then (()=>{
+           for(var key in eventIds){
+              this.getEventById(eventIds[key]).then((res:object)=>{
+                 if(res ==null){  //Event doesn't exist any more
+                   this.unfollow(eventIds[key]) //Unfollows Event
+                 }else{
+                   ret.push(res);
+                 }
+              })
+             
+           }
+           resolve(ret);
         })
+        
+
+
+          // for (var key in userdata) {
+          //   this.getEventById(userdata[key].event_id).then((res:object)=>{
+          //     if(res == null){
+          //       this.unfollow(userdata[key].event_id) //checks if user follows deletead Event.
+          //     }else{
+          //       var event = res;
+                
+          //       temparr.push(event);
+
+          //     }
+          //     // temparr.reverse();
+          //   })
+          // }
+
+
       })
+    
       return promise; 
     }
     
@@ -142,6 +168,27 @@ export class EventsProvider {
           reject(err);
         })
       });
+      return promise;
+    }
+
+    getTodayEvents(){
+      var promise = new Promise ((resolve,reject)=>{
+        let today =moment().format("YYYY-MM-DD");
+      
+        this.firedata.orderByChild('startDate').startAt(today).once("value",function(snapshot){
+          let events = snapshot.val();
+          let temparr =[];
+          for (var key in events) {
+            temparr.push(events[key]);
+          }
+          console.log(temparr);
+          resolve(temparr.reverse());
+
+        })
+     
+      }).catch(err =>{
+        console.log("Error getting today events");
+      })
       return promise;
     }
 }

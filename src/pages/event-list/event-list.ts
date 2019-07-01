@@ -29,7 +29,7 @@ export class EventListPage {
       if(res.length == 0){
         this.empty = true;    
       }
-      this.evnts = res;       
+      this.evnts = res     
      })
 
      

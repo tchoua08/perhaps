@@ -18,6 +18,7 @@ export class MessagesPage {
   userdetails;
   messages=[];
   user;
+  admin;
   showEmojiPicker = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public chatservice:ChatProvider,
   public alertCtrl:AlertController,public events:Events,public toastCtrl:ToastController,public zone:NgZone,
@@ -31,6 +32,7 @@ export class MessagesPage {
       this.messages = [];
       this.zone.run(() => {
         this.messages = this.chatservice.messages;
+        console.log(this.messages);
         
       })
       this.formatDate();

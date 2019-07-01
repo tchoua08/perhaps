@@ -1,12 +1,8 @@
 <ion-header>
 
   <ion-navbar color="primary">
-  
-  <ion-searchbar  #search
-  (ionInput)="onInput($event)"
-  (ionCancel)="onCancel($event)"
-  [(ngModel)]="query">
-</ion-searchbar>
+   <ion-title>Discover Events</ion-title> 
+ 
 <ion-buttons left>
     
   <button ion-button icon-only (click)="closeModal()">
@@ -18,27 +14,88 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background" >
+ <ion-toolbar color="primary">
+  <ion-segment mode="ios" color="primary" [(ngModel)]="when" color="light">
+    <ion-segment-button value="search">
+      Search
+    </ion-segment-button>
+    <ion-segment-button value="today">
+      Today
+    </ion-segment-button>
 
-   
-  <ion-spinner  name="circles" *ngIf="spinner" color="secondary"></ion-spinner>
+  </ion-segment>    
+ </ion-toolbar> 
+  
 
-    <ion-list>
-        <button ion-item *ngFor="let event of events"  (click)="gotoEvent(event.id)">
-          {{ event.title }}
-        </button>  
+
+  <div [ngSwitch]="when">
+    <ion-list *ngSwitchCase="'search'">
+      <ion-item>
+        <ion-label>Search By</ion-label>
+        <ion-select [(ngModel)]="search_type" interface = 'action-sheet' (ionChange)="onChange()">
+          <ion-option value="byName">Name</ion-option>
+          <ion-option value="byDate">Date</ion-option>
+        </ion-select>
+     </ion-item>
+      
+     
+     <ion-searchbar mode="ios" (ionInput)="onInput($event)" *ngIf="search_type == 'byName'"></ion-searchbar>
+        <br>
+      <ion-item-divider *ngIf="results.length>0">
+        Results
+      </ion-item-divider>
+      <ion-spinner *ngIf="spinner"></ion-spinner>
+      <ion-list >
+          <ion-card  *ngFor="let key of results">
+      
+              <ion-item >
+               <h2>{{key.title}} </h2>
+                <p>{{key.description}}</p>
+             </ion-item>
+              <ion-item> 
+                <ion-icon name="calendar" item-left small ></ion-icon>
+                <span item-left>{{key.startDate | date:'  dd MMMM' }}</span>
+                <ion-icon name="cash" item-left small ></ion-icon>
+                <span item-left>{{key.ticket_price}}£</span>
+                <button ion-button icon-right clear item-end color="secondary" (click)="gotoEvent(key.id)">
+                  Show more
+                  <ion-icon showWhen="android" name="arrow-dropright"></ion-icon>
+                </button>
+              </ion-item>
+            
+            </ion-card>
       </ion-list>
-
-<!-- 
-      <ion-row *ngIf="events === undefined || events.length == 0">
-          <ion-col text-center>
-            <div class="msg">
-              <ion-icon name="md-bulb"></ion-icon>
-              <p>Search Events </p>
-            </div>
-           
-              
-          </ion-col>
-        </ion-row> -->
+    </ion-list>
+  
     
+    
+    
+    <ion-list *ngSwitchCase="'today'">
+      <ion-item text-wrap *ngIf="events.length==0 || evnts == null">
+        <p>No events for Today , Search to find more...</p>
+      </ion-item>
+
+      <ion-card  *ngFor="let key of events">
+      
+        <ion-item >
+         <h2>{{key.title}} </h2>
+          <p>{{key.description}}</p>
+       </ion-item>
+        <ion-item> 
+          <ion-icon name="calendar" item-left small ></ion-icon>
+          <span item-left>{{key.startDate | date:'  dd MMMM' }}</span>
+          <ion-icon name="cash" item-left small ></ion-icon>
+          <span item-left>{{key.ticket_price}}£</span>
+          <button ion-button icon-right clear item-end color="secondary" (click)="gotoEvent(key.id)">
+            Show more
+            <ion-icon showWhen="android" name="arrow-dropright"></ion-icon>
+          </button>
+        </ion-item>
+      
+      </ion-card>
+    </ion-list>
+
+</div>
+
 </ion-content>

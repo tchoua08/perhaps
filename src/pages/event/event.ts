@@ -32,12 +32,24 @@ export class EventPage {
   tickets=0;
   id = null;
   following=null;
+
+  showMoreButton=false;
+  showButtonTag ="Show More";
+  show_more = true;
+  description = '';
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public ref: ChangeDetectorRef,private socialSharing: SocialSharing,
     public eventservice:EventsProvider,private launchNavigator:LaunchNavigator,public toastCtrl:ToastController) {
       this.id = this.navParams.get('id');
       this.eventservice.getEventById(this.id).then((res:any)=>{
         this.event.title = res.title;
         this.event.description = res.description;
+      
+        if(res.description.length > 200){
+          this.showMoreButton = true; 
+          this.description = res.description.slice(0,200);
+        }
+        this.description = res.description.slice(0,200);
         this.event.ticket_price = res.ticket_price;
         this.event.startDate = res.startDate;
         this.event.address = res.address + "," + res.city;
@@ -131,6 +143,17 @@ export class EventPage {
     this.navCtrl.pop();
   }
 
+  showMore(){
+    if(this.show_more == true){
+      this.description = this.event.description;
+      this.showButtonTag = "Show Less";
+      this.show_more = false;
+    }else{
+      this.description  = this.event.description.slice(0,200);
+      this.showButtonTag = "Show More";
+      this.show_more = true;
+    }
+  }
 
 
 }
