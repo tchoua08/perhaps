@@ -10,7 +10,7 @@ import 'firebase/database';
 export class UserProvider {
   firedata = firebase.database().ref('/Users');
   constructor(public afireauth:AngularFireAuth,public toastCtrl:ToastController) {
-   
+
   }
 
   adduser(newuser){
@@ -24,6 +24,7 @@ export class UserProvider {
             uid:this.afireauth.auth.currentUser.uid,
             firstName:newuser.firstName,
             lastName:newuser.lastName,
+            admin:newuser.admin,
             photoURL:'http://www.freeiconspng.com/uploads/person-icon-8.png'
           }).then (() =>{
             resolve({succes:true});
@@ -35,7 +36,7 @@ export class UserProvider {
        })
       }).catch((err)=>{
         reject(err);
-      })    
+      })
     })
 
     return promise;
@@ -69,12 +70,12 @@ export class UserProvider {
       var promise = new Promise((resolve, reject) => {
           this.afireauth.auth.currentUser.updateProfile({
               displayName: this.afireauth.auth.currentUser.displayName,
-              photoURL: imageurl      
+              photoURL: imageurl
           }).then(() => {
             this.firedata.child(this.afireauth.auth.currentUser.uid).update({
-           
+
               photoURL: imageurl,
-             
+
               }).then(() => {
                   resolve({ success: true });
                   }).catch((err) => {
@@ -82,7 +83,7 @@ export class UserProvider {
                   })
           }).catch((err) => {
                 reject(err);
-            })  
+            })
       })
       return promise;
   }
@@ -91,13 +92,36 @@ export class UserProvider {
     var promise = new Promise((resolve, reject) => {
       this.firedata.child(firebase.auth().currentUser.uid).once('value', (snapshot) => {
         resolve(snapshot.val());
-        
+
       }).catch((err) => {
         reject(err);
         })
       })
       return promise;
   }
+
+
+  getAllUser(): Promise<any> {
+    return new Promise( (resolve, reject) => {
+      this.firedata.orderByKey()
+ .on('value', (snapshot:any) => {
+   let userList:any = [];
+   snapshot.forEach( (childSnap:any) => {
+   userList.push({
+      uid:childSnap.val().uid,
+      admin:childSnap.val().admin,
+      firstName:childSnap.val().firstName,
+      lastName:childSnap.val().lastName,
+      photoUrl :childSnap.val().photoURL
+
+   });
+
+   return false
+   });
+   resolve(userList);
+ });
+ });
+}
 
 
 
@@ -134,9 +158,9 @@ export class UserProvider {
       photoURL:fbUser.photoURL,
       facebook:true
     }).then (() =>{
-     
+
     }).catch((err)=>{
-        
+
     })
    }
 
@@ -145,5 +169,5 @@ export class UserProvider {
    }
 
 
-  
+
 }

@@ -1,4 +1,4 @@
-import { Component,ElementRef,ViewChild ,Input} from '@angular/core';
+import { Component,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams,Content,ViewController } from 'ionic-angular';
 import {EventsProvider} from '../../providers/events/events'
 
@@ -12,31 +12,31 @@ import {EventsProvider} from '../../providers/events/events'
 export class EventListPage {
   @ViewChild(Content)
 
- 
+
 
   content: Content;
   hide="true";
   type;
-   
-    
-  
+
+
+
   evnts;
   empty=false;
   constructor(public navCtrl: NavController, public navParams: NavParams ,public viewCtrl: ViewController,public eventservice:EventsProvider) {
     this.type = this.navParams.get('type');
-    
+     console.log("valeur de this.type:"+this.type);
     this.eventservice.getEventByType(this.type).then((res: any) => {
       if(res.length == 0){
-        this.empty = true;    
+        this.empty = true;
       }
-      this.evnts = res     
+      this.evnts = res
      })
 
-     
+
   }
-     
+
   doRefresh(){
-    
+
   }
 
   ionViewWillEnter() {
@@ -44,10 +44,11 @@ export class EventListPage {
   }
 
   gotoEvent(id){
+    console.log("valeur de id0:"+id)
     this.navCtrl.push('EventPage',{
       id:id
     });
-   
+
   }
 
 

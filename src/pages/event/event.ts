@@ -12,7 +12,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 @Component({
   selector: 'page-event',
   templateUrl: 'event.html',
-  
+
 })
 export class EventPage {
   event = {
@@ -23,7 +23,11 @@ export class EventPage {
     ticket_price:'',
     address:'',
     endDate:'',
-    image:null,
+    endTime:'',
+    startTime:'',
+    image1:null,
+    image2:null,
+    image3:null
   }
   buttonColor = null;
   color = null;
@@ -37,26 +41,33 @@ export class EventPage {
   showButtonTag ="Show More";
   show_more = true;
   description = '';
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public ref: ChangeDetectorRef,private socialSharing: SocialSharing,
     public eventservice:EventsProvider,private launchNavigator:LaunchNavigator,public toastCtrl:ToastController) {
       this.id = this.navParams.get('id');
       this.eventservice.getEventById(this.id).then((res:any)=>{
+        console.log("valeur de event:"+JSON.stringify(res));
         this.event.title = res.title;
         this.event.description = res.description;
-      
+
         if(res.description.length > 200){
-          this.showMoreButton = true; 
+          this.showMoreButton = true;
           this.description = res.description.slice(0,200);
         }
+
         this.description = res.description.slice(0,200);
         this.event.ticket_price = res.ticket_price;
         this.event.startDate = res.startDate;
-        this.event.address = res.address + "," + res.city;
+        this.event.startTime = res.startTime;
+        this.event.endTime = res.endTime;
+        this.event.address = res.address;
         this.event.following = res.following;
         this.event.endDate = res.endDate;
-        this.event.image = res.image;
         this.event.following = res.following;
+        if( typeof res.image0!='undefined') this.event.image1 = res.image0;
+        if( typeof res.image1!='undefined') this.event.image2 = res.image1;
+        if( typeof res.image2!='undefined') this.event.image3 = res.image2;
+
     })
     this.eventservice.checkIfFollow(this.id).then((res:any)=>{
        this.following = res;
@@ -65,7 +76,7 @@ export class EventPage {
   }
 
   ionViewDidLoad() {
-  
+
   }
 
   addTicket(){
@@ -78,7 +89,7 @@ export class EventPage {
     }else{
       this.tickets --;
     }
-    
+
   }
 
   follow(){
@@ -89,10 +100,10 @@ export class EventPage {
       this.icolor = null;
       var  follows = this.event.following +=1
       this.eventservice.followEvent(this.id).then(()=>{
-       
+
       }).catch((err)=>{
         alert(err);
-      });  
+      });
       this.eventservice.setFollowingCount(this.id,follows);
       this.following = true;
     } else {
@@ -104,10 +115,10 @@ export class EventPage {
       this.buttonColor ='#FFFFFF';
       this.color  = null
       this.following = false;
-      this.icolor ='#1d334a' 
+      this.icolor ='#1d334a'
 
     }
-  
+
   }
 
   launchMaps(){
@@ -116,7 +127,7 @@ export class EventPage {
       error => console.log('Error launching navigator', error)
     );
   }
-  
+
 
   bookTicket(){
     if(this.tickets <=0){
@@ -132,7 +143,7 @@ export class EventPage {
         tickets:this.tickets
       })
     }
-   
+
   }
 
   share(){

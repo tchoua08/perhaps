@@ -1,0 +1,40 @@
+
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title> Dashboard </ion-title>
+
+  </ion-navbar>
+
+
+
+
+
+</ion-header>
+
+
+<ion-content class="background">
+
+  <ion-card type="button" (click)="presentActionSheet('Weekdays')">
+      <img src="assets/imgs/pic2.png"/>
+      <div class="card-title">Weekdays</div>
+      <div class="card-subtitle"></div>
+
+    </ion-card>
+
+    <ion-card type="button" (click)="presentActionSheet('Fridays')">
+      <img src="assets/imgs/pic3.png"/>
+      <div class="card-title">Fridays</div>
+  </ion-card>
+
+    <ion-card type="button" (click)="presentActionSheet('Saturdays')">
+      <img src="assets/imgs/pic4.png"/>
+      <div class="card-title">Saturdays</div>
+
+
+    </ion-card>
+
+    <!-- <ion-calendar #calendar></ion-calendar> -->
+
+</ion-content>
+

@@ -1,0 +1,14 @@
+page-updateevent {
+  ion-list:first-child {
+    margin-top: 32px;
+  }
+  ion-list + ion-list {
+    margin-top: 0;
+  }
+
+  .btninfo{
+    width:100%;
+}
+
+
+}

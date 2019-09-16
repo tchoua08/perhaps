@@ -14,12 +14,13 @@ import {UserProvider} from '../../providers/user/user'
 
 
 export class RegisterPage {
-  
+
   newuser = {
     email: '',
     password:'',
     firstName:'',
-    lastName:''
+    lastName:'',
+    admin:0
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public userservice:UserProvider,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
@@ -34,7 +35,7 @@ export class RegisterPage {
 
     let loader = this.loadingCtrl.create({
       spinner:'dots',
-     
+
     });
     loader.present();
 
@@ -50,7 +51,7 @@ export class RegisterPage {
     })
 
     loader.dismiss();
-   
+
   }
 
   signin(){

@@ -26,7 +26,7 @@ export class PaymentPage {
   }
 
   ionViewDidLoad() {
-   
+
   }
 
 
@@ -38,17 +38,18 @@ export class PaymentPage {
     console.log(this.paymentMethod);
     if(this.paymentMethod == 'paypal'){
       this.payPal.init({
-        PayPalEnvironmentProduction: '',
+        PayPalEnvironmentProduction: 'AZiROpLWUcuZztwrd7OXr9PuN--8t3sRoROPqZphTKdIKX_rvXvunbWB0R6btCPGM2q4KKAI90ZwoZgA',
         PayPalEnvironmentSandbox: 'AYo_Rc5jNdBFG3PaIVAw491HrjoVD5gA-gGdENRYqE3njqu7qdWsyuAi_hjn1kK8diIG23i0mW8JD9Zs'
       }).then(() => {
         // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-        this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        this.payPal.prepareToRender('PayPalEnvironmentProduction', new PayPalConfiguration({
           // Only needed if you get an "Internal Service Error" after PayPal login!
           //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
 
-          
+
         })).then(() => {
-          let payment = new PayPalPayment('3.33', 'USD', 'Description', 'sale');
+
+          let payment = new PayPalPayment( this.total, 'GBP', 'Description', 'sale');
           this.payPal.renderSinglePaymentUI(payment).then((res) => {
               console.log('Success');
               console.log(res);
@@ -62,7 +63,7 @@ export class PaymentPage {
       }, () => {
         console.log('Error in initialization')
       });
-     
+
     }else{
 
     }
@@ -82,7 +83,7 @@ export class PaymentPage {
   //   // this.stripe.createCardToken(card)
   //   //   .then(token => console.log(token.id))
   //   //   .catch(error => console.log(error));
-  //   // 
+  //   //
 
   //   this.stripe.createCardToken(card).then((token)=>{
   //     console.log(token.id);

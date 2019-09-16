@@ -16,16 +16,16 @@
 
 
 <ion-content [scroll-hide]="viewCtrl" class='background' >
-     
+
 
   <ion-spinner  name="circles" *ngIf="!evnts" color="secondary"></ion-spinner>
-  
-  
+
+
   <ion-refresher (ionRefresh)="doRefresh($event)" class="refresher">
         <ion-refresher-content>
         </ion-refresher-content>
     </ion-refresher>
-  
+
   <ion-item *ngIf="empty">
     <h2>Nothing to show at the momment...</h2>
     <ion-icon name="sad"></ion-icon>
@@ -33,22 +33,25 @@
 
 
     <ion-card  *ngFor="let key of evnts">
-      
+
         <ion-item >
          <h2>{{key.title}} </h2>
-          <p>{{key.description}}</p>
+          <p text-wrap>{{key.description}}</p>
        </ion-item>
-        <ion-item> 
+        <ion-item>
           <ion-icon name="calendar" item-left small ></ion-icon>
           <span item-left>{{key.startDate | date:'  dd MMMM' }}</span>
           <ion-icon name="cash" item-left small ></ion-icon>
           <span item-left>{{key.ticket_price}}£</span>
-          <button ion-button icon-right clear item-end color="secondary" (click)="gotoEvent(key.id)">
-            Show more
-            <ion-icon showWhen="android" name="arrow-dropright"></ion-icon>
-          </button>
+
         </ion-item>
-      
+        <ion-item>
+          <button ion-button icon-right clear item-end color="secondary" (click)="gotoEvent(key.id)">
+            <h4 text-wrap>Show more</h4>
+             <ion-icon showWhen="android" name="arrow-dropright"></ion-icon>
+           </button>
+        </ion-item>
+
       </ion-card>
 
 </ion-content>

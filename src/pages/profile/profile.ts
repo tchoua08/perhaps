@@ -21,6 +21,7 @@ export class ProfilePage {
   avatar;
   firstname;
   lastname;
+  admin;
   constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl:ActionSheetController,
   public userservice:UserProvider,public loadingCtrl:LoadingController,public zone:NgZone,public alertCtrl:AlertController,
   public toastCtrl:ToastController,public imghandler:ImghandlerProvider,private app:App,private storageservice:StorageProvider) {
@@ -28,7 +29,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-   
+
   }
 
   cards(){
@@ -43,7 +44,7 @@ export class ProfilePage {
       title: 'Modify your Infomation',
       buttons: [
         {
-          
+
           text: 'Image',
 			    icon: 'image',
 			    cssClass: 'EditionIcon',
@@ -68,7 +69,7 @@ export class ProfilePage {
         }
       ]
     });
- 
+
     actionSheet.present();
   }
 
@@ -76,18 +77,28 @@ export class ProfilePage {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
-  
+
     loading.present();
-  
+
     this.userservice.getUser().then((res: any) => {
       this.firstname = res.firstName;
       this.lastname = res.lastName;
-      this.zone.run(() => {
+      this.admin = res.admin;
+      console.log("admin:"+this.admin);
+      console.log("type admin:"+typeof this.admin);
+      this.avatar = res.photoURL;
+     /* this.zone.run(() => {
         this.avatar = res.photoURL;
-      })
+      })*/
       loading.dismiss();
-      
+
+    }, err=>{
+      loading.dismiss();
     })
+  }
+
+  dashboard(){
+    this.navCtrl.push('dashboard');
   }
 
   editname(){
@@ -119,7 +130,7 @@ export class ProfilePage {
                 duration: 3000,
                 position: 'top'
               });
-              
+
              toast.present();
              this.loaduserdetails();
             }) .catch(err =>{
@@ -131,8 +142,8 @@ export class ProfilePage {
              toast.present();
             })
 
-            
-         
+
+
           }
         }
       ]
@@ -145,7 +156,7 @@ export class ProfilePage {
       buttons: ['okay']
     });
     this.imghandler.uploadimage().then((url: any) => {
-    
+
       this.userservice.updateimage(url).then((res: any) => {
         if (res.success) {
           statusalert.setTitle('Updated');
@@ -153,8 +164,8 @@ export class ProfilePage {
           statusalert.present();
           this.zone.run(() => {
           this.avatar = url;
-        })  
-        }  
+        })
+        }
       }).catch((err) => {
           statusalert.setTitle('Failed');
           statusalert.setSubTitle('Your profile pic was not changed');
@@ -165,11 +176,12 @@ export class ProfilePage {
 
  logout(){
   console.log('logging out...');
+  localStorage.setItem("loginperhaps","non");
   this.storageservice.deleteCredentials();
   this.app.getRootNav().setRoot('LoginPage');
  }
 
-  
-  
+
+
 
 }

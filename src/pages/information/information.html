@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar color="secondary">
+      <ion-title>
+        Event
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content class="outer-content">
+
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Title"  [(ngModel)]="event.title"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-input placeholder="Phone number"  [(ngModel)]="event.phone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="number" placeholder="Price"  [(ngModel)]="event.price"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label stacked>Description</ion-label>
+          <ion-textarea
+          [(ngModel)]="event.description"></ion-textarea>
+
+    </ion-item>
+
+
+    <ion-searchbar
+      placeholder="address"
+      [(ngModel)]="autocompleteDest.query"
+      [showCancelButton]="false"
+      (ionInput)="updateSearchDestination()"
+    >
+    </ion-searchbar>
+    <ion-list >
+      <ion-item *ngFor="let item of autocompleteItemsDest" tappable (click)="selectSearchResultDestination(item)">
+        {{ item.description }}
+      </ion-item>
+    </ion-list>
+
+    </ion-list>
+
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Start Date</ion-label>
+        <ion-datetime isplayFormat="MMM DD YYYY" min="{{ minYear }}"
+          max="{{ maxYear }}" [(ngModel)]="event.startDate"></ion-datetime>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Start Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.startTime"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>End Date</ion-label>
+        <ion-datetime isplayFormat="MMM DD YYYY"  min="{{ minYear }}"
+          max="{{ maxYear }}" [(ngModel)]="event.endDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>End Time</ion-label>
+          <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.endTime"></ion-datetime>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-list>
+        <ion-item (click)="getPic()">
+            <span item-start>select photos</span>
+            <span item-start>(3 Max)</span>
+            <button ion-button icon-start clear item-end>
+              <ion-icon name="photos"></ion-icon>
+              Gallery
+            </button>
+          </ion-item>
+
+    </ion-list>
+
+    <ion-grid *ngIf="imageResponse.length>0">
+        <ion-row>
+          <ion-col *ngFor="let image of imageResponse"  col-4 tappable>
+            <img src="{{image}}" alt="">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+    <button class="btninfo" small [disabled]="event.description==='' || event.title==='' || event.price==='' || event.location==='' ||  event.startDate==='' || event.startTime==='' || imageResponse.length===0 || event.endDate==='' || event.endTime==='' || event.phone===''" ion-button (click)="save()">Publish</button>
+
+  </ion-content>

@@ -18,7 +18,7 @@ import { ImghandlerProvider } from '../providers/imghandler/imghandler';
 import { CardProvider } from '../providers/card/card';
 import { ChatProvider } from '../providers/chat/chat';
 import { EventsProvider } from '../providers/events/events';
-// import { NetworkProvider } from '../providers/network/network'; 
+// import { NetworkProvider } from '../providers/network/network';
 import { StorageProvider } from '../providers/storage/storage';
 
 
@@ -30,8 +30,9 @@ import { Facebook } from '@ionic-native/facebook'
 import { PayPal} from '@ionic-native/paypal';
 import { FCM } from '@ionic-native/fcm';
 import { Crop } from '@ionic-native/crop';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PinDialog } from '@ionic-native/pin-dialog';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 
 
@@ -46,12 +47,12 @@ import { PinDialog } from '@ionic-native/pin-dialog';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     IonicStorageModule.forRoot(),
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-  
+
   ],
   providers: [
     StatusBar,
@@ -72,9 +73,10 @@ import { PinDialog } from '@ionic-native/pin-dialog';
     PinDialog,
     Facebook,
     Crop,
+    ImagePicker,
     PayPal,
     FCM
-   
+
   ]
 })
 export class AppModule {}

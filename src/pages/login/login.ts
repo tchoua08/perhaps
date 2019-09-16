@@ -21,28 +21,34 @@ export class LoginPage {
   private toastCtrl: ToastController,public loadingCtrl: LoadingController,
    private userservice:UserProvider,private storageservice:StorageProvider,private facebook:Facebook
     ) {
+
+      if( localStorage.getItem("loginperhaps")==='oui'){
+
+        this.navCtrl.setRoot('TabsPage');
+      }
   }
 
   ionViewDidLoad() {
 
     this.credentials.email='';
     this.credentials.password='';
-   
+
     // console.log('ionViewDidLoad LoginPage');
   }
-  
+
 
   signin(){
-    
-    
+
+
     let loader = this.loadingCtrl.create({
       spinner:'dots',
-     
+
     });
 
     loader.present();
    this.authservice.login(this.credentials).then((res:any) => {
       this.storageservice.storeCredentials(this.credentials);
+      localStorage.setItem("loginperhaps","oui");
       this.navCtrl.setRoot('TabsPage');
     })
     .catch(err =>{
@@ -55,7 +61,7 @@ export class LoginPage {
     })
 
     loader.dismiss();
-  
+
   }
 
   signup(){
@@ -67,11 +73,11 @@ export class LoginPage {
       .then( response => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
-  
+
         firebase.auth().signInWithCredential(facebookCredential)
-          .then( success => { 
-            console.log("Firebase success: " + JSON.stringify(success.providerId)); 
-        
+          .then( success => {
+            console.log("Firebase success: " + JSON.stringify(success.providerId));
+
             console.log();
             var user = {
               firstName:success.displayName,
@@ -82,7 +88,7 @@ export class LoginPage {
             this.userservice.addFacebookUser(user);
             this.navCtrl.setRoot('TabsPage');
           });
-  
+
       }).catch((error) => { console.log(error) });
   }
 

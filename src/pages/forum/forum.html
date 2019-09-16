@@ -1,0 +1,61 @@
+
+<ion-header>
+    <ion-navbar >
+        <ion-title></ion-title>
+      </ion-navbar>
+
+  </ion-header>
+
+
+<ion-content #content >
+
+  <div class="message-wrap" *ngIf="messagesList!=null">
+
+
+
+    <div *ngFor="let msg of messagesList"
+         class="message"
+         [class.left]="msg.uid != meuid"
+         [class.right]=" msg.uid ===meuid">
+      <img class="user-img" [src]="msg.profilePicture" alt="" src="">
+
+      <div class="msg-detail">
+        <div class="msg-info">
+          {{msg.name}}
+          <p>
+            &nbsp;&nbsp;&nbsp;{{msg.datemss}}</p>
+        </div>
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker "></p>
+          {{msg.message}}
+        </div>
+
+      </div>
+
+
+  </div>
+
+  </div>
+</ion-content>
+
+  <ion-footer no-border>
+      <div class="input-wrap">
+
+
+        <textarea
+                  placeholder="Type your message..."
+                  [(ngModel)]="newmessage"
+                  (keyup.enter)="send()"
+
+                 >
+        </textarea>
+
+        <button ion-button clear icon-only item-right (click)="send()">
+          <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+        </button>
+        </div>
+
+    </ion-footer>
+
+

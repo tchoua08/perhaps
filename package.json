@@ -27,6 +27,7 @@
     "@ionic-native/file": "^4.20.0",
     "@ionic-native/file-chooser": "^4.20.0",
     "@ionic-native/file-path": "^4.20.0",
+    "@ionic-native/image-picker": "^4.20.0",
     "@ionic-native/launch-navigator": "^4.20.0",
     "@ionic-native/paypal": "^4.20.0",
     "@ionic-native/pin-dialog": "^4.20.0",
@@ -37,7 +38,7 @@
     "angularfire2": "^5.0.0-rc.11",
     "card.io.cordova.mobilesdk": "^2.1.0",
     "com.paypal.cordova.mobilesdk": "^3.5.0",
-    "cordova-android": "6.3.0",
+    "cordova-android": "^6.4.0",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-crop": "^0.4.0",
     "cordova-plugin-device": "^2.0.2",
@@ -93,7 +94,10 @@
         "FACEBOOK_ANDROID_SDK_VERSION": "4.40.0"
       },
       "cordova-plugin-fcm-with-dependecy-updated": {},
-      "cordova-plugin-pin-dialog": {}
+      "cordova-plugin-pin-dialog": {},
+      "cordova-plugin-telerik-imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Gallery"
+      }
     },
     "platforms": [
       "android"
